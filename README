@@ -1,0 +1,41 @@
+VBT is also documented by intel-gpu-tools:
+https://cgit.freedesktop.org/xorg/app/intel-gpu-tools/tree/tools/
+
+There's intel_vbt_decode (former intel_bios_decode) available intel_vbt_decode.c that will print all tables in human readable form:
+https://cgit.freedesktop.org/xorg/app/intel-gpu-tools/tree/tools/intel_vbt_decode.c
+
+Here is the self-sufficient context in one single directory (done on Fedora 25 latest upgrades - author himself tested the tool in given context below), extracted from the following web site:
+
+[user@localhost intel-gpu-tools]$ gcc intel_vbt_decode.c intel_device_info.c -o vbt
+[user@localhost intel-gpu-tools]$ ls -al
+total 352
+drwxrwxr-x. 2 user user   4096 Apr  8 07:33 .
+drwxrwxr-x. 4 user user   4096 Apr  8 07:32 ..
+-rw-rw-r--. 1 user user   4123 Apr  6 20:18 drmtest.h
+-rw-rw-r--. 1 user user  12889 Apr  6 21:07 i915_pciids.h
+-rw-rw-r--. 1 user user  27736 Apr  6 20:46 igt_core.h
+-rw-rw-r--. 1 user user   9816 Apr  6 20:44 intel_batchbuffer.h
+-rw-rw-r--. 1 user user  28814 Apr  6 20:03 intel_bios.h
+-rw-rw-r--. 1 user user   6236 Apr  6 20:15 intel_chipset.h
+-rw-rw-r--. 1 user user   6796 Apr  6 21:05 intel_device_info.c
+-rw-rw-r--. 1 user user   3310 Apr  6 20:14 intel_io.h
+-rw-rw-r--. 1 user user 116344 Apr  6 20:47 intel_reg.h
+-rw-rw-r--. 1 user user  54812 Apr  6 19:58 intel_vbt_decode.c
+-rwxrwxr-x. 1 user user  54928 Apr  8 07:33 vbt
+[user@localhost intel-gpu-tools]$
+
+WARNING: Please, do note that additional packages might be requested due to missing DRM definition files?! For me to make this package work on the bare F25 notebook, I needed to do few package installations, and few /usr/include .h files copying, since these files were expected to be on other/adjacent directories.
+
+I needed to inslatt the following packages on Fedora 25 distro to make VBT parser to compile:
+[1] libpciaccess-devel-0.13.4-3.fc24.x86_64 : PCI access library development package, Repo: fedora
+[2] libdrm-devel-2.4.71-2.fc25.x86_64 : Direct Rendering Manager development package, Repo: fedora
+
+[user@localhost include]$ su -m
+Password: 
+[root@localhost include]# cp drm/drm.h .
+[root@localhost include]# cp drm/drm_mode.h .
+
+With this Human Readable Interface dumper the following should be possible:
+[1] Make a "decompiler" that would convert VBT from the option ROM into a human/machine readable text format;
+[2] Make a "compiler" that would take that text format and create a binary VBT from it;
+[3] Put the binary VBT into the ACPI IGD OpRegion table (or wherever the graphics driver can find it).
