@@ -26,9 +26,11 @@ drwxrwxr-x. 4 user user   4096 Apr  8 07:32 ..
 
 WARNING: Please, do note that additional packages might be requested due to missing DRM definition files?! For me to make this package work on the bare F25 notebook, I needed to do few package installations, and few /usr/include .h files copying, since these files were expected to be on other/adjacent directories.
 
-I needed to inslatt the following packages on Fedora 25 distro to make VBT parser to compile:
+I needed to install the following packages on Fedora 25 distro to make VBT parser to compile into human readable format:
 [1] libpciaccess-devel-0.13.4-3.fc24.x86_64 : PCI access library development package, Repo: fedora
 [2] libdrm-devel-2.4.71-2.fc25.x86_64 : Direct Rendering Manager development package, Repo: fedora
+
+Then, as already noted, I copied some files to adjacent directories, as shown below:
 
 [user@localhost include]$ su -m
 Password: 
