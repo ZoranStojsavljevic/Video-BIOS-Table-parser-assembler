@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 #include <libdrm/intel_bufmgr.h>
-#include <drm/i915_drm.h>
+#include <libdrm/i915_drm.h>
 
 #include "igt_core.h"
 #include "intel_reg.h"
