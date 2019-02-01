@@ -1,5 +1,3 @@
-{{copypaste|date=April 2017|url=kernel.org/doc/html/latest/gpu/i915.html#video-bios-table-vbt}}
-
 ==Definition of Video BIOS Table (VBT)==
 The Video BIOS Table, or VBT, provides platform and board specific configuration information to the driver that is not discoverable or available through other means. By other means the most used method here is to read EDID table from the attached monitor, over Display Data Channel (DDC) using two pin I2C serial interface.
 
